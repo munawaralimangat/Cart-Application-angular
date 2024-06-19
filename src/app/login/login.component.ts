@@ -22,7 +22,5 @@ export class LoginComponent implements OnInit {
     console.log('Email:', this.email);
     console.log('Password:', this.password);
     console.log('Remember Me:', this.rememberMe);
-
-    // Perform login action, e.g., call an authentication service
   }
 }
