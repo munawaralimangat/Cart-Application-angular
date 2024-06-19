@@ -14,7 +14,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getData().subscribe((data:any[])=>{
-      this.products = data
+      this.products = data.sort( (a,b)=> b.id - a.id )
     })
   }
 
