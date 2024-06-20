@@ -15,10 +15,12 @@ import { AppComponent } from "./app.component";
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AboutusComponent } from './aboutus/aboutus.component';
+
 import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
+import { CartItemComponent } from "./cart/cart-item/cart-item.component";
+import { CartSummaryComponent } from "./cart/cart-summary/cart-summary.component";
 
 //App component is the root component
 
@@ -28,10 +30,12 @@ import { CartComponent } from './cart/cart.component';
         LoginComponent,
         SignupComponent,
         NavbarComponent,
-        AboutusComponent,
+        
         ProductsComponent,
         HomeComponent,
         CartComponent,
+        CartItemComponent,
+        CartSummaryComponent
 
     ],
     imports:[BrowserModule,
