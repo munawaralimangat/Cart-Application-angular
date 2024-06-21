@@ -37,6 +37,13 @@
         </div>
       </div>
     </div>
+    <ng-container *ngIf="isLoggedIn">
+      <div class="hidden sm:flex space-x-4">
+        <span class="text-gray-300">Welcome, {{ userName }}</span>
+        <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" (click)="logout()">Logout</button>
+      </div>
+    </ng-container>
+    
     <!-- Mobile Menu -->
     <div class="sm:hidden" id="mobile-menu" [ngClass]="{'block': isMobileMenuOpen, 'hidden': !isMobileMenuOpen}">
       <div class="px-2 pt-2 pb-3 space-y-1">

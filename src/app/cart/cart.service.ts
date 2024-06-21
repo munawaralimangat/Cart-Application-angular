@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
 interface cartItem  {
-    id:Number;
-    title:String;
-    price:Number;
-    quantitiy:Number;
-    image:String
+    id:number;
+    title:string;
+    price:number;
+    quantity:number;
+    image:string
 }
 
 
@@ -14,35 +14,55 @@ interface cartItem  {
     providedIn:'root'
 })
 
-export class cartService {
+export class CartService {
     private cart = new BehaviorSubject<cartItem[]>([])
     cart$ = this.cart.asObservable()
 
-    constructor() {
-        console.log('ggg',this.cart)
-    }
+    constructor () { }
 
     getCart () {
         return this.cart.value
     }
 
-    addToCart () {
+    addToCart(item: cartItem) {
+        const currentCart = this.cart.value;
+        const itemIndex = currentCart.findIndex(cartItem => cartItem.id == item.id)
+        if(itemIndex > -1){
+            currentCart[itemIndex].quantity += item.quantity
+        }else{
+            currentCart.push(item)
+        }
+        this.cart.next(currentCart)
+      }
 
+    incrementQuantity (itemId:number) {
+        const currentCart = this.cart.value
+        const itemIndex = currentCart.findIndex( cartItem => cartItem.id == itemId )
+        if(itemIndex > -1 ){
+            currentCart[itemIndex].quantity += 1
+            this.cart.next(currentCart)
+        }
+        console.log(currentCart)
     }
 
-    incrementCart () {
-
+    decrementQuantity (itemId:number) {
+        const currentCart = this.cart.value
+        const itemIndex = currentCart.findIndex(cartItem => cartItem.id == itemId )
+        if(itemIndex > -1){
+            currentCart[itemIndex].quantity -= 1
+            if(currentCart[itemIndex].quantity < 1){
+                currentCart.splice(itemIndex,1)
+            }
+            this.cart.next(currentCart)
+        }
     }
 
-    decrementCart () {
-
-    }
-
-    removeFromCart () {
-
+    removeFromCart (itemId:number) {
+        const currentCart = this.cart.value.filter( cartItem => cartItem.id !== itemId)
+        this.cart.next(currentCart)
     }
 
     getTotalPrice () {
-
+        return this.cart.value.reduce( (acc,item)=>acc + item.price * item.quantity,0 )
     }
 }

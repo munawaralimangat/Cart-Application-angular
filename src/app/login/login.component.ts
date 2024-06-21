@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   rememberMe: boolean = false;
 
-  constructor() { }
+  constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     console.log('page rendered');
@@ -19,8 +21,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     // Handle form submission logic here
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-    console.log('Remember Me:', this.rememberMe);
+    const email = this.email
+    const password = this.password
+
+    const loggedIn = this.authService.login(email,password)
+
+    if(loggedIn){
+      this.router.navigate(['/'])
+    }else{
+      this.email = ''
+      this.password = ''
+      console.log('login failed')
+    }
+
   }
 }

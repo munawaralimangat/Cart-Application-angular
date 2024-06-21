@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,16 +14,35 @@ export class SignupComponent implements OnInit {
   password:string = '';
   confirmPassword:string = ''
 
-  constructor() { }
+  constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     console.log('page rendered')
   }
 
   onSubmit():void {
-    console.log(this.name)
-    console.log(this.password)
-    console.log(this.email)
-    console.log(this.confirmPassword)
+    const name = this.name;
+    const email = this.email;
+    const password = this.password
+    const confirmPassword = this.confirmPassword
+
+    if(password !== confirmPassword){
+      alert('password mismatch')
+      this.password = ''
+      this.confirmPassword = ''
+      return 
+    }
+
+    const registered = this.authService.signup(email,name,password)
+
+    if(registered){
+      this.router.navigate(['/'])
+    }else{
+      console.log('signup failed')
+      this.name = '';
+      this.email = '';
+      this.password = '';
+      this.confirmPassword = '';
+    }
   }
 }
