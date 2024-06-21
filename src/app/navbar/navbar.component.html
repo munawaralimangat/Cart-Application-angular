@@ -1,58 +1,66 @@
+<!-- navbar.component.html -->
+
 <nav class="bg-gray-800">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16">
-        <!-- Logo Section -->
-        <div class="absolute inset-y-0 left-0 flex items-center">
-          <a routerLink="/" class="text-white text-lg font-bold">MyAppLogo</a>
-        </div>
-        <!-- Center Navigation Links -->
-        <div class="flex-1 flex items-center justify-center">
-          <div class="hidden sm:block">
-            <div class="flex space-x-4">
-              <a routerLink="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-              <a routerLink="/products"  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Products</a>
-              <a routerLink="about"  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About Us</a>
-            </div>
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="relative flex items-center justify-between h-16">
+      <!-- Logo Section -->
+      <div class="absolute inset-y-0 left-0 flex items-center">
+        <a routerLink="/" class="text-white text-lg font-bold">MyAppLogo</a>
+      </div>
+      <!-- Center Navigation Links -->
+      <div class="flex-1 flex items-center justify-center">
+        <div class="hidden sm:block">
+          <div class="flex space-x-4">
+            <a routerLink="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+            <a routerLink="/products" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Products</a>
+            <a routerLink="/aboutus" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About Us</a>
           </div>
         </div>
-        <!-- Right Side Login/Signup Buttons -->
-        <div class="absolute inset-y-0 right-0 flex items-center">
+      </div>
+      <!-- Right Side Login/Signup/Logout Buttons -->
+      <div class="absolute inset-y-0 right-0 flex items-center">
+        <ng-container *ngIf="isLoggedIn">
           <div class="hidden sm:flex space-x-4">
+            <span class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ userName }}</span>
             <a routerLink="/cart" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</a>
+            <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" (click)="logout()">Logout</button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn">
+          <div class="hidden sm:flex space-x-4">
             <a routerLink="/login" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
             <a routerLink="/signup" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Signup</a>
           </div>
-        </div>
-        <!-- Mobile Menu Button -->
-        <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
-          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" (click)="toggleMobileMenu()">
-            <span class="sr-only">Open main menu</span>
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
+        </ng-container>
+      </div>
+      <!-- Mobile Menu Button -->
+      <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
+        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" (click)="toggleMobileMenu()">
+          <span class="sr-only">Open main menu</span>
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
     </div>
-    <ng-container *ngIf="isLoggedIn">
-      <div class="hidden sm:flex space-x-4">
-        <span class="text-gray-300">Welcome, {{ userName }}</span>
-        <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" (click)="logout()">Logout</button>
-      </div>
-    </ng-container>
-    
-    <!-- Mobile Menu -->
-    <div class="sm:hidden" id="mobile-menu" [ngClass]="{'block': isMobileMenuOpen, 'hidden': !isMobileMenuOpen}">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <a routerLink="/" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-        <a routerLink="/cart" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Cart</a>
-        <a routerLink="/products" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Products</a>
+  </div>
+  <!-- Mobile Menu -->
+  <div class="sm:hidden" id="mobile-menu" [ngClass]="{'block': isMobileMenuOpen, 'hidden': !isMobileMenuOpen}">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <span *ngIf="isLoggedIn" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{userName}}</span>
+      <a routerLink="/" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+      <a routerLink="/products" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Products</a>
+      <a routerLink="/aboutus" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About Us</a>
+      <ng-container *ngIf="isLoggedIn">
+        <a class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" (click)="logout()">Logout</a>
+      </ng-container>
+      <ng-container *ngIf="!isLoggedIn">
         <a routerLink="/login" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
         <a routerLink="/signup" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Signup</a>
-      </div>
+      </ng-container>
     </div>
-  </nav>
-  
+  </div>
+</nav>

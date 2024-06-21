@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 interface User {
   name:string;
@@ -11,9 +12,15 @@ interface User {
 })
 export class AuthService {
 
-  private isLoggedIn = false;
-  private userName = '';
+  // private isLoggedIn = false;
+  // private userName = '';
   private users:User[] = []
+
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable()
+
+  private userNameSubject = new BehaviorSubject<string>('');
+  userName$ = this.userNameSubject.asObservable()
 
 
   constructor() {
@@ -21,10 +28,10 @@ export class AuthService {
    }
 
    login(email:string,password:string){
-    const user = this.users.find((u)=> u.email == email && u.password == password )
+    const user = this.users.find((u) => u.email == email && u.password == password )
     if(user){
-      this.isLoggedIn = true
-      this.userName = user.name
+      this.isLoggedInSubject.next(true)
+      this.userNameSubject.next(user.name)
       return true
     }
     return false
@@ -40,24 +47,23 @@ export class AuthService {
         return false
       }
       this.users.push({name,email,password})
-      this.isLoggedIn = true
-      this.userName = name
+      this.isLoggedInSubject.next(true)
+      this.userNameSubject.next(name)
       return true
     }
     return false
    }
 
    logOut():void {
-    this.isLoggedIn = false
-    this.userName = ''
+    this.isLoggedInSubject.next(false)
+    this.userNameSubject.next('')
    }
 
    isLoggedInUser ():boolean {
-    console.log(this.isLoggedIn)
-    return this.isLoggedIn
+    return this.isLoggedInSubject.getValue()
    }
 
    getUserName (){
-    return this.userName
+    return this.userNameSubject.getValue()
    }
 }

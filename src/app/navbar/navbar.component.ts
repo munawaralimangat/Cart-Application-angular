@@ -1,32 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
-  isLoggedIn:boolean = false;
-  userName:string = '';
-
-  constructor(private authService:AuthService) { }
+  isLoggedIn: boolean = false;
+  userName: string = '';
+  private authStatusSub: Subscription = Subscription.EMPTY;
+  private userNameSub: Subscription = Subscription.EMPTY;
 
   isMobileMenuOpen = false;
 
+  constructor(private authService: AuthService) { }
+
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedInUser()
-    this.userName = this.authService.getUserName()
+    this.authStatusSub = this.authService.isLoggedIn$.subscribe((status: boolean) => {
+      this.isLoggedIn = status;
+    });
+
+    this.userNameSub = this.authService.userName$.subscribe((name: string) => {
+      this.userName = name;
+    });
   }
-  toggleMobileMenu() {
+
+  ngOnDestroy(): void {
+    this.authStatusSub.unsubscribe();
+    this.userNameSub.unsubscribe();
+  }
+
+  toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  logout():void {
-    this.authService.logOut()
-    this.isLoggedIn = false
-    this.userName = ''
+  logout(): void {
+    this.authService.logOut();
   }
-
 }
