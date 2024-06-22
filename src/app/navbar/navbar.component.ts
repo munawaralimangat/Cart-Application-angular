@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   isLoggedIn: boolean = false;
-  userName: string = '';
+  userName: any = '';
   private authStatusSub: Subscription = Subscription.EMPTY;
   private userNameSub: Subscription = Subscription.EMPTY;
 
@@ -23,9 +23,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.isLoggedIn = status;
     });
 
-    this.userNameSub = this.authService.userName$.subscribe((name: string) => {
-      this.userName = name;
-    });
+    this.authService.currentUser$.subscribe(user =>{
+      this.userName = user?.name
+    })
   }
 
   ngOnDestroy(): void {

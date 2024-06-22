@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { AuthService } from "../auth.service";
 
-interface cartItem  {
+interface CartItem  {
     id:number;
     title:string;
     price:number;
@@ -15,24 +16,37 @@ interface cartItem  {
 })
 
 export class CartService {
-    private cart = new BehaviorSubject<cartItem[]>([])
+    private cart = new BehaviorSubject<CartItem[]>([])
     cart$ = this.cart.asObservable()
 
-    constructor () { }
+    constructor (private authService:AuthService) {
+        this.authService.currentUser$.subscribe(currentUser => {
+            if(currentUser && currentUser.cart) {
+                this.cart.next(currentUser.cart)
+            }else{
+                this.cart.next([])
+            }
+        })
+     }
+    private updateCartStorage (){
+        const currentCart = this.cart.value
+        this.authService.updateUserCart(currentCart)
+    }
 
     getCart () {
         return this.cart.value
     }
 
-    addToCart(item: cartItem) {
+    addToCart(item: CartItem) {
         const currentCart = this.cart.value;
-        const itemIndex = currentCart.findIndex(cartItem => cartItem.id == item.id)
+        const itemIndex = currentCart.findIndex( cartItem => cartItem.id == item.id )
         if(itemIndex > -1){
             currentCart[itemIndex].quantity += item.quantity
         }else{
             currentCart.push(item)
         }
         this.cart.next(currentCart)
+        this.updateCartStorage()
       }
 
     incrementQuantity (itemId:number) {
@@ -41,6 +55,7 @@ export class CartService {
         if(itemIndex > -1 ){
             currentCart[itemIndex].quantity += 1
             this.cart.next(currentCart)
+            this.updateCartStorage()
         }
         console.log(currentCart)
     }
@@ -54,12 +69,14 @@ export class CartService {
                 currentCart.splice(itemIndex,1)
             }
             this.cart.next(currentCart)
+            this.updateCartStorage();
         }
     }
 
     removeFromCart (itemId:number) {
         const currentCart = this.cart.value.filter( cartItem => cartItem.id !== itemId)
         this.cart.next(currentCart)
+        this.updateCartStorage();
     }
 
     getTotalPrice () {

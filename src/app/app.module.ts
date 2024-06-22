@@ -33,12 +33,11 @@ import { CartSummaryComponent } from "./cart/cart-summary/cart-summary.component
         
         ProductsComponent,
         HomeComponent,
-        CartComponent,
-        CartItemComponent,
-        CartSummaryComponent
+
 
     ],
-    imports:[BrowserModule,
+    imports:[
+        BrowserModule,
         RouterModule,
         AppRoutingModule,
         FormsModule,
