@@ -7,7 +7,7 @@ import { AppRoutingModule } from "./app-routing.module";
 //AppRoutingModule is the dedicated module for configuring routing for the application
 import { FormsModule } from "@angular/forms";
 // FormsModule is the module that provides directives and services for building and managing forms in angular application
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 // httpClientModule enables the application to communicating with backend services over HTTP requests
 
 import { RouterModule } from "@angular/router";
@@ -18,9 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
-import { CartComponent } from './cart/cart.component';
-import { CartItemComponent } from "./cart/cart-item/cart-item.component";
-import { CartSummaryComponent } from "./cart/cart-summary/cart-summary.component";
+import { MyInterceptor } from "./app.interceptor";
 
 //App component is the root component
 
@@ -30,7 +28,6 @@ import { CartSummaryComponent } from "./cart/cart-summary/cart-summary.component
         LoginComponent,
         SignupComponent,
         NavbarComponent,
-        
         ProductsComponent,
         HomeComponent,
 
@@ -43,7 +40,9 @@ import { CartSummaryComponent } from "./cart/cart-summary/cart-summary.component
         FormsModule,
         HttpClientModule
     ],
-    providers:[],
+    providers:[
+        {provide:HTTP_INTERCEPTORS,useClass:MyInterceptor,multi:true}
+    ],
     bootstrap:[AppComponent]
 })
 
