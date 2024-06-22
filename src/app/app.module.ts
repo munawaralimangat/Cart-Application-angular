@@ -18,7 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
-import { MyInterceptor } from "./app.interceptor";
+import { TokenInterceptor } from "./app.interceptor";
+import { AuthService } from "./auth.service";
 
 //App component is the root component
 
@@ -41,7 +42,8 @@ import { MyInterceptor } from "./app.interceptor";
         HttpClientModule
     ],
     providers:[
-        {provide:HTTP_INTERCEPTORS,useClass:MyInterceptor,multi:true}
+        {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true},
+        AuthService
     ],
     bootstrap:[AppComponent]
 })
