@@ -9,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 // FormsModule is the module that provides directives and services for building and managing forms in angular application
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 // httpClientModule enables the application to communicating with backend services over HTTP requests
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
@@ -39,7 +40,7 @@ import { AuthService } from "./auth.service";
         RouterModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers:[
         {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true},
