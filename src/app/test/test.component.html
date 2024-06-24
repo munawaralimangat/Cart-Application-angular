@@ -1,0 +1,33 @@
+
+    <div class="min-h-screen flex flex-col">
+      <!-- Header -->
+      <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Responsive Layout</h1>
+        <button class="lg:hidden" id="menuButton">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </header>
+  
+      <div class="flex flex-grow">
+        <!-- Sidebar -->
+        <aside class="bg-gray-700 text-white w-64 p-4 hidden lg:block" id="sidebar">
+          <nav>
+            <a href="#" class="block py-2 px-4 rounded hover:bg-gray-600">Home</a>
+            <a href="#" class="block py-2 px-4 rounded hover:bg-gray-600">About</a>
+            <a href="#" class="block py-2 px-4 rounded hover:bg-gray-600">Services</a>
+            <a href="#" class="block py-2 px-4 rounded hover:bg-gray-600">Contact</a>
+          </nav>
+        </aside>
+  
+        <!-- Main Content -->
+        <main class="flex-grow p-4 bg-gray-100">
+          <h2 class="text-xl font-bold mb-4">Main Content</h2>
+          <p>This is the main content area. Resize the browser window to see the responsive behavior.</p>
+        </main>
+      </div>
+    </div>
+
+
+

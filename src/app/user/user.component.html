@@ -1,0 +1,40 @@
+<div class="min-h-screen flex flex-col lg:flex-row">
+    <!-- Mobile Hamburger Menu -->
+    <header class="bg-gray-800 text-white p-4 flex justify-between items-center lg:hidden">
+      <button (click)="toggleSidebar()" class="text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </header>
+  
+    <!-- Sidebar -->
+    <div class="w-full sm:w-full md:w-full lg:w-64 bg-gray-800 text-white flex-shrink-0 lg:block" [ngClass]="{ 'hidden': !isSidebarOpen, 'block': isSidebarOpen }">
+      <div class="p-0 sm:p-6">
+        <h1 class="hidden sm:block text-2xl font-bold">{{ userName }}</h1>
+      </div>
+      <nav class="mt-4">
+        <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white" routerLink="/user">
+          Profile
+        </a>
+        <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white" routerLink="/user/settings">
+          Settings
+        </a>
+        <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white" routerLink="/user/orders">
+          Orders
+        </a>
+        <a (click)="logout()" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 cursor-pointer hover:text-white">
+          Logout
+        </a>
+      </nav>
+    </div>
+  
+    <!-- Main Content -->
+    <div class="flex-grow p-6 bg-gray-100">
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">User Profile</h2>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  

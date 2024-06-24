@@ -21,7 +21,7 @@
       <div class="absolute inset-y-0 right-0 flex items-center">
         <ng-container *ngIf="isLoggedIn">
           <div class="hidden sm:flex space-x-4">
-            <span class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase() }}</span>
+            <span routerLink="/user" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer">{{ userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase() }}</span>
             <a routerLink="/cart" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</a>
             <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" (click)="logout()">Logout</button>
           </div>

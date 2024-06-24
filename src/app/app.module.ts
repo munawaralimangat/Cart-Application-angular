@@ -13,25 +13,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from "./app.interceptor";
 import { AuthService } from "./auth.service";
+import { TestComponent } from './test/test.component';
 
 //App component is the root component
 
 @NgModule({
     declarations:[
         AppComponent,
-        SignupComponent,
         NavbarComponent,
-        ProductsComponent,
         HomeComponent,
-
-
+        TestComponent,
+        
     ],
     imports:[
         BrowserModule,
@@ -47,4 +44,6 @@ import { AuthService } from "./auth.service";
     bootstrap:[AppComponent]
 })
 
-export class AppModule { }
+export class AppModule { 
+    
+ }
