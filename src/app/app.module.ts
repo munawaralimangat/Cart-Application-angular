@@ -13,7 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
@@ -27,7 +26,6 @@ import { AuthService } from "./auth.service";
 @NgModule({
     declarations:[
         AppComponent,
-        LoginComponent,
         SignupComponent,
         NavbarComponent,
         ProductsComponent,
