@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   featuredProducts: any[] = [];
 
-  constructor(private productService: ProductService,private cartService:CartService) { }
+  constructor(private productService: ProductService,private cartService:CartService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.productService.getData().subscribe(
@@ -21,8 +22,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  showSuccess() {
+    this.toastr.success('Item added to cart');
+  }
+
   addToCart(item:any){
-    console.log(item)
+    this.showSuccess()
     this.cartService.addToCart({...item,quantity:1})
   }
 

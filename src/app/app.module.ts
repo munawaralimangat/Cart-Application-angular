@@ -11,6 +11,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 // httpClientModule enables the application to communicating with backend services over HTTP requests
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from './navbar/navbar.component';
@@ -36,6 +38,8 @@ import { TestComponent } from './test/test.component';
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
     ],
     providers:[
         {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true},

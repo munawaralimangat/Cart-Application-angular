@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -11,7 +12,7 @@ export class ProductsComponent implements OnInit {
 
   products:any[] = []
 
-  constructor(private productService:ProductService,private cartService:CartService) { }
+  constructor(private productService:ProductService,private cartService:CartService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.productService.getData().subscribe(
@@ -20,8 +21,12 @@ export class ProductsComponent implements OnInit {
     })
   }
 
+  showSucces(){
+    this.toastr.success('Item added to cart')
+  }
+
   addToCart (product:any) {
-    console.log(product)
+    this.showSucces()
     this.cartService.addToCart({...product,quantity:1})
   }
 
