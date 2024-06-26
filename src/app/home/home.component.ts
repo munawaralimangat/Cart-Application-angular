@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,13 @@ export class HomeComponent implements OnInit {
 
   featuredProducts: any[] = [];
 
-  constructor(private productService: ProductService,private cartService:CartService,private toastr:ToastrService) { }
+  constructor(
+    private productService: ProductService,
+    private cartService:CartService,
+    private toastr:ToastrService,
+    private authService:AuthService,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
     this.productService.getData().subscribe(
@@ -26,9 +34,17 @@ export class HomeComponent implements OnInit {
     this.toastr.success('Item added to cart');
   }
 
+  loginToAccount(){
+    this.toastr.info('Login to your account');
+  }
+
   addToCart(item:any){
+    if(!this.authService.isLoggedInUser()){
+      this.loginToAccount()
+      this.router.navigate(['/login'])
+      return
+    }
     this.showSuccess()
     this.cartService.addToCart({...item,quantity:1})
   }
-
 }

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { AuthService } from "../auth.service";
+import { ToastrService } from 'ngx-toastr';
 
 interface CartItem  {
     id:number;
@@ -19,7 +20,7 @@ export class CartService {
     private cart = new BehaviorSubject<CartItem[]>([])
     cart$ = this.cart.asObservable()
 
-    constructor (private authService:AuthService) {
+    constructor (private authService:AuthService,private toastr:ToastrService) {
         this.authService.currentUser$.subscribe(currentUser => {
             if(currentUser && currentUser.cart) {
                 this.cart.next(currentUser.cart)
@@ -66,6 +67,7 @@ export class CartService {
         if(itemIndex > -1){
             currentCart[itemIndex].quantity -= 1
             if(currentCart[itemIndex].quantity < 1){
+                this.toastr.success('Removed from cart')
                 currentCart.splice(itemIndex,1)
             }
             this.cart.next(currentCart)

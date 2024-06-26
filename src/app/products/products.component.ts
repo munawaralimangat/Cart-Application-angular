@@ -12,7 +12,11 @@ export class ProductsComponent implements OnInit {
 
   products:any[] = []
 
-  constructor(private productService:ProductService,private cartService:CartService,private toastr:ToastrService) { }
+  constructor(
+    private productService:ProductService,
+    private cartService:CartService,
+    private toastr:ToastrService,
+  ) { }
 
   ngOnInit(): void {
     this.productService.getData().subscribe(
