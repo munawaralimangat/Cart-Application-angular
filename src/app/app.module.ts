@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { TokenInterceptor } from "./app.interceptor";
 import { AuthService } from "./auth.service";
 import { TestComponent } from './test/test.component';
+import { CapitalizePipe } from './capitalize.pipe';
 
 //App component is the root component
 
@@ -30,6 +31,7 @@ import { TestComponent } from './test/test.component';
         NavbarComponent,
         HomeComponent,
         TestComponent,
+        CapitalizePipe,
         
     ],
     imports:[
