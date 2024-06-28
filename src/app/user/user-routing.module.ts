@@ -6,7 +6,8 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 const routes: Routes = [
-  {path:'',component:UserComponent,canActivate:[AuthGuard],children:[
+  {path:'',component:UserComponent,canActivate:[AuthGuard],
+    children:[
     {path:'settings',component:UserSettingsComponent},
     {path:'orders',component:UserOrdersComponent}
   ]}
