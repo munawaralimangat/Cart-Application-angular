@@ -1,11 +1,9 @@
-<!-- navbar.component.html -->
-
-<nav class="bg-gray-800">
+<nav class="bg-black">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       <!-- Logo Section -->
       <div class="absolute inset-y-0 left-0 flex items-center">
-        <a routerLink="/" class="text-white text-lg font-bold">MyAppLogo</a>
+        <a routerLink="/" class="text-white text-lg font-bold">Logo</a>
       </div>
       <!-- Center Navigation Links -->
       <div class="flex-1 flex items-center justify-center">
@@ -17,11 +15,18 @@
           </div>
         </div>
       </div>
-      <!-- Right Side Login/Signup/Logout Buttons -->
-      <div class="absolute inset-y-0 right-0 flex items-center">
+      <!-- Right Side Search and Login/Signup/Logout Buttons -->
+      <div class="absolute inset-y-0 right-0 flex items-center space-x-4">
+        <!-- Search Input and Button -->
+        <div class="hidden sm:flex items-center space-x-2">
+          <input type="text" class="px-3 py-2 rounded-md text-sm" placeholder="Search...">
+          <button class="bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-600">
+            Search
+          </button>
+        </div>
         <ng-container *ngIf="isLoggedIn">
           <div class="hidden sm:flex space-x-4">
-            <span routerLink="/user" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer">{{ userName | capitalize }}</span>  <!--Custom pipe example-->
+            <span routerLink="/user" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer">{{ userName | capitalize }}</span>  <!-- Custom pipe example -->
             <a routerLink="/cart" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</a>
             <button class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" (click)="logout()">Logout</button>
           </div>
@@ -61,6 +66,13 @@
         <a routerLink="/login" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
         <a routerLink="/signup" routerLinkActive="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Signup</a>
       </ng-container>
+    </div>
+    <!-- Search Input and Button for Mobile Menu -->
+    <div class="px-2 pt-2 pb-3 space-y-1 flex items-center space-x-2">
+      <input type="text" class="w-full px-3 py-2 rounded-md text-base" placeholder="Search...">
+      <button class="bg-gray-700 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600">
+        Search
+      </button>
     </div>
   </div>
 </nav>
